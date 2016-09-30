@@ -26,7 +26,7 @@ import org.spongepowered.api.text.Text;
 import com.flowpowered.math.vector.Vector3i;
 import com.google.inject.Inject;
 
-@Plugin(id = "jon077",
+@Plugin(id = "com_enderpigs_smite",
         name = "Smite",
         version = "1.0",
         description = "Use me on your enemies")
@@ -44,12 +44,11 @@ public class Smite {
         public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
 
             Player player = args.<Player>getOne("player").get();
-            String message = args.<String>getOne("message").get();
 
             final String name = player.getName();
-            logger.info("Executing command on player: {} with message: {}", name, message);
+            logger.info("Executing smite command on player: {}", name);
 
-            src.sendMessage(Text.of("Smiting " + name + "!  " + message));
+            src.sendMessage(Text.of("Smiting " + name + "!  "));
 
             Vector3i blockPosition = player.getLocation().getBlockPosition();
             final Optional<Entity> optionalEntity = Optional
@@ -76,8 +75,7 @@ public class Smite {
             .description(Text.of("Smite Command"))
             .permission("smiteplugin.command.smite")
             .arguments(
-                    GenericArguments.onlyOne(GenericArguments.player(Text.of("player"))),
-                    GenericArguments.remainingJoinedStrings(Text.of("message")))
+                    GenericArguments.onlyOne(GenericArguments.player(Text.of("player"))))
             .executor(new SmiteCommand(logger))
             .build();
 
