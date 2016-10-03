@@ -1,9 +1,11 @@
-package org.spongepowered.cookbook.plugin;
+package com.enderpigs.hungergames.plugin;
 
 import org.hamcrest.core.IsEqual;
 import org.junit.Assert;
 import org.junit.Test;
 import org.spongepowered.api.entity.EntityTypes;
+
+import com.enderpigs.hungergames.plugin.Game;
 
 public class GameTest extends Game {
 

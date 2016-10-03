@@ -1,4 +1,4 @@
-package org.spongepowered.cookbook.plugin;
+package com.enderpigs.hungergames.plugin;
 
 import java.util.Arrays;
 import java.util.HashMap;

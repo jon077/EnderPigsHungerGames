@@ -1,9 +1,11 @@
-package org.spongepowered.cookbook.plugin;
+package com.enderpigs.hungergames.plugin;
 
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.spongepowered.cookbook.plugin.Game.PostMessage;
+
+import com.enderpigs.hungergames.plugin.EnderpigsPostMessage;
+import com.enderpigs.hungergames.plugin.Game.PostMessage;
 
 public class EnderpigsPostMessageTest {
 

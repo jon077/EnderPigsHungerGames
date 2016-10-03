@@ -1,4 +1,4 @@
-package org.spongepowered.cookbook.plugin;
+package com.enderpigs.hungergames.plugin;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -12,7 +12,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.slf4j.Logger;
-import org.spongepowered.cookbook.plugin.Game.PostMessage;
+
+import com.enderpigs.hungergames.plugin.Game.PostMessage;
 
 
 public class EnderpigsPostMessage implements PostMessage{
