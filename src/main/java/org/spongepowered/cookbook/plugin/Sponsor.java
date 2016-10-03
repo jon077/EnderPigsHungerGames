@@ -45,9 +45,24 @@ public class Sponsor {
             ItemStack.of(ItemTypes.BREAD, 1),
             ItemStack.of(ItemTypes.BAKED_POTATO, 3),
             ItemStack.of(ItemTypes.CARROT, 2),
-            ItemStack.of(ItemTypes.COOKIE, 1)),
-        ARMOR,
-        WEAPONS;
+            ItemStack.of(ItemTypes.COOKIE, 1)
+            ),
+        ARMOR(
+            ItemStack.of(ItemTypes.LEATHER_BOOTS, 1),
+            ItemStack.of(ItemTypes.GOLDEN_CHESTPLATE, 1),
+            ItemStack.of(ItemTypes.CHAINMAIL_HELMET, 1),
+            ItemStack.of(ItemTypes.LEATHER_LEGGINGS, 1)             
+            ),
+        WEAPONS(
+            ItemStack.of(ItemTypes.IRON_AXE, 1),
+            ItemStack.of(ItemTypes.GOLDEN_SWORD, 1),
+            ItemStack.of(ItemTypes.BOW, 1),
+            ItemStack.of(ItemTypes.ARROW, 16)
+            ),
+        POTIONS(
+            ItemStack.of(ItemTypes.SPLASH_POTION, 6),
+            ItemStack.of(ItemTypes.LINGERING_POTION, 6)
+        );
         
         private Collection<ItemStack> itemStacks;
 
@@ -80,9 +95,9 @@ public class Sponsor {
             Optional<SponsorGift> sponsorGift = Enums.getIfPresent(SponsorGift.class, giftText.toUpperCase());
             logger.info("Executing sponsor command on player: {} with gift: {}", name, sponsorGift);
             
+            final String message;
             if(sponsorGift.isPresent()){
-    
-                player.sendMessage(Text.of("You are being sponsored.  Look in the chest at your feet."));
+                message = "You are being sponsored.  Look in the chest at your feet.";
     
                 final Location<World> playerLocation = player.getLocation();
                 final Location<World> chestLocation = player.getWorld().getLocation(
@@ -95,9 +110,14 @@ public class Sponsor {
                 final Chest chest = (Chest) chestLocation.getTileEntity().get();
                 final TileEntityInventory<TileEntityCarrier> inventory = chest.getInventory();
 
-                sponsorGift.get().getItemStacks().stream().forEach(stack -> inventory.offer(stack));
+                sponsorGift.get().getItemStacks().stream().forEach(
+                        stack -> inventory.offer(stack.copy()));
                 
+                }else{
+                    message = "Cannot sponsor item: " + giftText; 
                 }
+            
+            player.sendMessage(Text.of(message));
 
             return CommandResult.success();
         }
@@ -115,7 +135,7 @@ public class Sponsor {
 
         CommandSpec myCommandSpec = CommandSpec.builder()
             .description(Text.of("Sponsor Command"))
-            .permission("sponsorplugin.command.smite")
+            .permission("sponsorplugin.command.sponsor")
             .arguments(
                     GenericArguments.onlyOne(GenericArguments.player(Text.of("player"))),
                     GenericArguments.remainingJoinedStrings(Text.of("gift")))
