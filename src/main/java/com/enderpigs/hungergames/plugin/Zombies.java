@@ -169,7 +169,7 @@ public class Zombies {
             .executor(new ZombieCommand(container, logger))
             .build();
 
-    Sponge.getCommandManager().register(this, myCommandSpec, "zombies");
+        Sponge.getCommandManager().register(this, myCommandSpec, "zombies");
 
     }
 }
