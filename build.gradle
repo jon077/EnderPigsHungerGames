@@ -16,6 +16,8 @@ repositories {
 
 dependencies {
     compile "org.spongepowered:spongeapi:5.0.0-SNAPSHOT"
-
+    compile "org.glassfish.jersey.core:jersey-client:2.5.1"
+    
+    testCompile "org.slf4j:slf4j-simple:1.6.1"
 	testCompile 'junit:junit:4.12'
 }
