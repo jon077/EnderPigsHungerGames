@@ -6,8 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.stream.IntStream;
 
 import org.slf4j.Logger;
@@ -35,6 +33,7 @@ import org.spongepowered.api.text.Text;
 import org.spongepowered.api.world.Location;
 import org.spongepowered.api.world.World;
 
+import com.enderpigs.hungergames.api.EPSponge;
 import com.google.inject.Inject;
 
 @Plugin(id = "com_enderpigs_storm",

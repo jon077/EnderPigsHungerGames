@@ -10,7 +10,6 @@ import org.spongepowered.api.entity.EntityTypes;
 import org.spongepowered.api.entity.living.Living;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.Listener;
-import org.spongepowered.api.event.entity.ConstructEntityEvent;
 import org.spongepowered.api.event.entity.DestructEntityEvent.Death;
 import org.spongepowered.api.event.network.ClientConnectionEvent.Login;
 import org.spongepowered.api.plugin.Plugin;
@@ -18,6 +17,7 @@ import org.spongepowered.api.plugin.PluginContainer;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.world.World;
 
+import com.enderpigs.hungergames.api.EPSponge;
 import com.google.inject.Inject;
 
 @Plugin(id = "com_enderpigs_playerlifecycle",

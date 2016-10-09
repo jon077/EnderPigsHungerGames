@@ -1,4 +1,4 @@
-package com.enderpigs.hungergames.plugin;
+package com.enderpigs.hungergames.api;
 
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.world.World;
