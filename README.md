@@ -12,7 +12,50 @@ Ender Pigs are a team from Super League gaming.  This set of plugins is used to 
 # Plugins
 
 ## Sponsor
-* Sponsor a player with a chest of items at their feet.
+* Sponsor a player with a chest of items at their feet
 ```
 /sponsor <player> <gift>
 ```
+
+## Smite
+* Smite a player by striking them with lightning
+```
+/smite <player>
+```
+
+## Game
+* Core game lifecycle plugin
+
+### Start
+* Starts the game and posts the world on the forums
+* Initiates the scoring
+```
+/game start
+```
+
+### Leaderboard
+* Sends the current leaderboard to the chat room
+```
+/game leaderboard
+```
+
+### Player Lifecyle
+* Sends messages during player login and death
+
+### Storm
+* Creates a storm by spawning from a few blocks up.  Only spawns the specified entity type
+```
+/storm <entity type>
+```
+
+### Zombie
+* Spawns zombies in a specified shape
+```
+/zombie <shape>
+```
+
+
+
+
+
+
