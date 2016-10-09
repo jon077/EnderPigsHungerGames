@@ -27,7 +27,6 @@ import org.spongepowered.api.event.cause.entity.damage.source.EntityDamageSource
 import org.spongepowered.api.event.entity.DestructEntityEvent.Death;
 import org.spongepowered.api.event.game.state.GamePreInitializationEvent;
 import org.spongepowered.api.plugin.Plugin;
-import org.spongepowered.api.plugin.PluginContainer;
 import org.spongepowered.api.text.Text;
 
 import com.google.inject.Inject;
@@ -47,13 +46,11 @@ public class Game {
     public static class GameCommand implements CommandExecutor {
 
         private final Logger logger;
-        private final PluginContainer container;
         private final PostMessage postMessage;
         private Scoreboard scoreboard;
 
-        public GameCommand(Scoreboard scoreboard, PluginContainer container, Logger logger) {
+        public GameCommand(Scoreboard scoreboard, Logger logger) {
             this.scoreboard = scoreboard;
-            this.container = container;
             this.logger = logger;
 
             postMessage = new EnderpigsPostMessage(logger);
@@ -135,8 +132,6 @@ public class Game {
     public Game() {
         scoreboard = new Scoreboard();
     }
-    @Inject
-    private PluginContainer container;
 
     @Inject
     private Logger logger;
@@ -158,7 +153,7 @@ public class Game {
             .permission("gameplugin.command.game")
             .arguments(
                     GenericArguments.onlyOne(GenericArguments.choices(Text.of("command"), arg1)))
-            .executor(new GameCommand(scoreboard, container, logger))
+            .executor(new GameCommand(scoreboard, logger))
             .build();
 
     Sponge.getCommandManager().register(this, myCommandSpec, "game");

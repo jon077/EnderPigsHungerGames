@@ -23,7 +23,6 @@ import org.spongepowered.api.event.cause.entity.spawn.EntitySpawnCause;
 import org.spongepowered.api.event.cause.entity.spawn.SpawnTypes;
 import org.spongepowered.api.event.game.state.GamePreInitializationEvent;
 import org.spongepowered.api.plugin.Plugin;
-import org.spongepowered.api.plugin.PluginContainer;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.world.Location;
 import org.spongepowered.api.world.World;
@@ -95,10 +94,8 @@ public class Zombies {
     public static class ZombieCommand implements CommandExecutor {
 
         private final Logger logger;
-        private final PluginContainer container;
 
-        public ZombieCommand(PluginContainer container, Logger logger) {
-            this.container = container;
+        public ZombieCommand(Logger logger) {
             this.logger = logger;
         }
 
@@ -142,9 +139,6 @@ public class Zombies {
     }
 
     @Inject
-    private PluginContainer container;
-
-    @Inject
     private Logger logger;
 
     @Listener
@@ -166,7 +160,7 @@ public class Zombies {
             .permission("zombiesplugin.command.zombies")
             .arguments(
                     GenericArguments.onlyOne(GenericArguments.choices(Text.of("command"), arg1)))
-            .executor(new ZombieCommand(container, logger))
+            .executor(new ZombieCommand(logger))
             .build();
 
         Sponge.getCommandManager().register(this, myCommandSpec, "zombies");

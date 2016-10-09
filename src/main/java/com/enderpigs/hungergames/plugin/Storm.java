@@ -28,7 +28,6 @@ import org.spongepowered.api.event.cause.entity.spawn.SpawnTypes;
 import org.spongepowered.api.event.game.state.GamePreInitializationEvent;
 import org.spongepowered.api.plugin.Plugin;
 import org.spongepowered.api.plugin.PluginContainer;
-import org.spongepowered.api.scheduler.SpongeExecutorService;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.world.Location;
 import org.spongepowered.api.world.World;
@@ -48,15 +47,11 @@ public class Storm {
         private static final int DROP_NUMBER = 40;
         
         private final Random random = new Random();
-        private final SpongeExecutorService executorService;
         
-        private final Logger logger;
         private final PluginContainer container;
 
-        public StormCommand(PluginContainer container, Logger logger) {
+        public StormCommand(PluginContainer container) {
             this.container = container;
-            this.logger = logger;
-            this.executorService = Sponge.getScheduler().createSyncExecutor(container);
         }
 
         @Override
@@ -135,7 +130,7 @@ public class Storm {
             .permission("stormplugin.command.storm")
             .arguments(
                     GenericArguments.onlyOne(GenericArguments.choices(Text.of("command"), arg1)))
-            .executor(new StormCommand(container, logger))
+            .executor(new StormCommand(container))
             .build();
 
         Sponge.getCommandManager().register(this, myCommandSpec, "storm");

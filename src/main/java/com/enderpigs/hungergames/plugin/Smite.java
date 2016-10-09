@@ -20,7 +20,6 @@ import org.spongepowered.api.event.cause.entity.spawn.EntitySpawnCause;
 import org.spongepowered.api.event.cause.entity.spawn.SpawnTypes;
 import org.spongepowered.api.event.game.state.GamePreInitializationEvent;
 import org.spongepowered.api.plugin.Plugin;
-import org.spongepowered.api.plugin.PluginContainer;
 import org.spongepowered.api.text.Text;
 
 import com.flowpowered.math.vector.Vector3i;
@@ -60,9 +59,6 @@ public class Smite {
         }
 
     }
-
-    @Inject
-    private PluginContainer container;
 
     @Inject
     private Logger logger;
