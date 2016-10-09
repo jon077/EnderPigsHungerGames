@@ -70,7 +70,7 @@ public class Storm {
                 .findFirst();
             
             if(entityType.isPresent()){
-                final World world = Sponge.getServer().getWorld("world").get();
+                final World world = EPSponge.world();
                 world.getPlayers().stream().forEach(player -> rainEntities(entityType.get(), player));
             }
             
@@ -107,7 +107,8 @@ public class Storm {
             EntityTypes.PIG,
             EntityTypes.LIGHTNING,
             EntityTypes.BLAZE,
-            EntityTypes.SMALL_FIREBALL
+            EntityTypes.SMALL_FIREBALL,
+            EntityTypes.SKELETON
             );
 
     @Inject

@@ -169,7 +169,7 @@ public class Game {
     public void onEntityDeath(Death death){
         
         final Cause cause = death.getCause();
-        logger.info("Zombie died.  Cause: {}", cause);
+        logger.info("Death.  Cause: {}", cause);
         
         Optional<EntityDamageSource> entityDamageSource = cause.first(EntityDamageSource.class);
         if(entityDamageSource.isPresent()){
