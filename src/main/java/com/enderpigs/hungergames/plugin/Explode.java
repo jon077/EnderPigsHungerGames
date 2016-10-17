@@ -1,8 +1,9 @@
 package com.enderpigs.hungergames.plugin;
 
+import java.util.stream.IntStream;
+
 import org.slf4j.Logger;
 import org.spongepowered.api.Sponge;
-import org.spongepowered.api.block.BlockTypes;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
@@ -19,9 +20,8 @@ import org.spongepowered.api.plugin.PluginContainer;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.world.Location;
 import org.spongepowered.api.world.World;
-import org.spongepowered.api.world.explosion.Explosion;
 
-import com.flowpowered.math.vector.Vector3d;
+import com.enderpigs.hungergames.api.EPSponge;
 import com.google.inject.Inject;
 
 
@@ -40,6 +40,8 @@ public class Explode {
     
     public static class ExplodeCommand implements CommandExecutor {
 
+        private static final int EXPLODE_NUMBER = 20;
+        
         private final Logger logger;
         private final PluginContainer container;
 
@@ -52,24 +54,32 @@ public class Explode {
         public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
 
         	final Player player = args.<Player>getOne("player").get();
-            final World world = Sponge.getServer().getWorld("world").get();
+            final RandomLocation randomLocation = new RandomLocation(5, 10, EXPLODE_NUMBER);
            
-            Location<World> location = player.getLocation().add(new Vector3d(7, 0, 0));
             
-            tnt(location, 3, Cause.source(container).build());
+            //Distance away from player decreases
+            //Decrease from 10 by increments of 2
+            //Stop when we get close (don't actually hurt the player)
+
+            IntStream.range(0, EXPLODE_NUMBER)
+            .forEach(x -> {
+                Sponge.getScheduler().createTaskBuilder()
+                .execute(() -> {
+                    
+                    final Location<World> explodeLocation =
+                            randomLocation.getLocation(
+                            player.getLocation());
+                    logger.info(" Exploding: " + explodeLocation);
+                    EPSponge.tnt(explodeLocation, 3, Cause.source(container).build());
+                })
+                .delayTicks(x*60)
+                .submit(container);
+            });
+                
            
             return CommandResult.success();
         }
         
-    	public static void tnt(Location<World> location, float radius, Cause cause) {
-    		location.getExtent().triggerExplosion(Explosion.builder()
-    				.location(location)
-    				.shouldDamageEntities(true)
-    				.shouldPlaySmoke(true)
-    				.shouldBreakBlocks(true)
-    				.radius(radius)
-    				.build(), cause);
-    	}
 
     }
 
