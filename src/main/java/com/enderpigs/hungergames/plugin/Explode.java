@@ -40,6 +40,8 @@ public class Explode {
     
     public static class ExplodeCommand implements CommandExecutor {
 
+        private static final int MIN_RADIUS = 5;
+        private static final int MAX_RADIUS = 10;
         private static final int EXPLODE_NUMBER = 20;
         
         private final Logger logger;
@@ -54,7 +56,7 @@ public class Explode {
         public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
 
         	final Player player = args.<Player>getOne("player").get();
-            final RandomLocation randomLocation = new RandomLocation(5, 10, EXPLODE_NUMBER);
+            final RandomLocation randomLocation = new RandomLocation(MIN_RADIUS, MAX_RADIUS, EXPLODE_NUMBER);
            
             
             //Distance away from player decreases
